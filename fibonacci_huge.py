@@ -27,6 +27,8 @@ def get_fibonaccihuge(n, m):
     fab_list = [0, 1]
     pattern_list = [0, 1]
 
+    get_repeatable_list = False
+
     for i in range(2, n+1):
         fab_i = fab_list[i - 1] + fab_list[i - 2]
         fab_list.append(fab_i)
@@ -35,11 +37,15 @@ def get_fibonaccihuge(n, m):
         pattern_list.append(remainder_i)
 
         if is_list_repeatable(pattern_list):
+            get_repeatable_list = True
             break
 
-    pattern_length = len(pattern_list)//2
-    final_remainder = n%pattern_length
-    return pattern_list[final_remainder]
+    if get_repeatable_list:
+        pattern_length = len(pattern_list)//2
+        final_remainder = n%pattern_length
+        return pattern_list[final_remainder]
+    else:
+        return pattern_list[n]
     # return 0
 
 if __name__ == '__main__':
