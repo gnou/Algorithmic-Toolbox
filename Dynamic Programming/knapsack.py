@@ -1,15 +1,1 @@
-# Uses python3
-import sys
-
-def optimal_weight(W, w):
-    # write your code here
-    result = 0
-    for x in w:
-        if result + x <= W:
-            result = result + x
-    return result
-
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    W, n, *w = list(map(int, input.split()))
-    print(optimal_weight(W, w))
+# Uses python3import sysdef optimal_weight(W, w):    value = []    n = len(w)  # Counts of list w    for item_count in range(0, n + 1):        value.append([])        for knapsack_weight in range(0, W+1):            if item_count == 0 or knapsack_weight == 0:                value[item_count].append(0)            else:                value_without_i = value[item_count-1][knapsack_weight]                value_with_i = 0                item_weight = w[item_count-1]   # also item_value                if item_weight <= knapsack_weight:                    value_with_i = value[item_count-1][knapsack_weight-item_weight] + item_weight                value[item_count].append(max(value_with_i, value_without_i))    return value[n][W]if __name__ == '__main__':    input = sys.stdin.read()    W, n, *w = list(map(int, input.split()))    print(optimal_weight(W, w))
